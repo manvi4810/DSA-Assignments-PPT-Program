@@ -1,0 +1,213 @@
+ Q-1
+public class Question_1 {
+    public static void main(String[] args) {
+        int[] arr1 = {1, 2, 3, 4, 5};
+        int[] arr2 = {1, 2, 5, 7, 9};
+        int[] arr3 = {1, 3, 4, 5, 8};
+
+        int[] commonElements = findCommonElements(arr1, arr2, arr3);
+        
+        // Print the common elements
+        System.out.print("Common Elements: ");
+        for (int element : commonElements) {
+            System.out.print(element + " ");
+        }
+    }
+
+    public static int[] findCommonElements(int[] arr1, int[] arr2, int[] arr3) {
+        List<Integer> commonList = new ArrayList<>();
+        
+        int i = 0, j = 0, k = 0;
+
+        while (i < arr1.length && j < arr2.length && k < arr3.length) {
+            if (arr1[i] == arr2[j] && arr2[j] == arr3[k]) {
+                commonList.add(arr1[i]);
+                i++;
+                j++;
+                k++;
+            } else if (arr1[i] < arr2[j]) {
+                i++;
+            } else if (arr2[j] < arr3[k]) {
+                j++;
+            } else {
+                k++;
+            }
+        }
+        
+        // Convert ArrayList to array
+        int[] commonElements = new int[commonList.size()];
+        for (int index = 0; index < commonList.size(); index++) {
+            commonElements[index] = commonList.get(index);
+        }
+        
+        return commonElements;
+    }
+}
+Q-2
+public class Question_2 {
+    
+
+        public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+            
+           
+            Arrays.sort(nums1);
+            Arrays.sort(nums2);
+            List<List<Integer>> ans= new ArrayList<>();
+            ArrayList<Integer> a= new ArrayList<>();
+            ArrayList<Integer> b= new ArrayList<>();
+    
+            int n=nums1.length;
+            int m= nums2.length;
+             int i=0,j=0;
+            while(i<n&&j<m)
+            {
+                if(nums1[i]<nums2[j])
+                {
+                    if(a.size()==0||nums1[i]!=a.get(a.size()-1))
+                    {
+                        a.add(nums1[i]);
+                        i++;
+                    }
+                }
+                    else if(nums1[i]==nums2[j])
+                    {
+                        int aa= nums1[i];
+                        while(i<n&&nums1[i]==aa)
+                        {
+                            i++;
+                        }
+                         while(j<m&&nums2[j]==aa)
+                        {
+                            j++;
+                        }
+    
+                    }
+                    else
+                    {
+                        if(b.size()==0||nums2[j]!=b.get(b.size()-1))
+                        {
+                            b.add(nums2[j]);
+                            j++;
+                        }
+                    }
+            }
+                      // Add any remaining elements in nums1 to the first result vector
+            while(i<n){
+                if(a.size()==0 || nums1[i]!=a.get(a.size()-1))
+                        a.add(nums1[i]);
+                        i++;
+            }
+            // Add any remaining elements in nums2 to the second result vector
+            while(j<m){
+                    if(b.size()==0 || nums2[j]!=b.get(b.size()-1))
+                    b.add(nums2[j]);
+                    j++;
+                }
+            ans.add(a);
+            ans.add(b);
+            // Return both result vectors
+            return ans;
+        
+                
+            
+        }
+    
+    }
+
+Q-3
+public class Question_3 {
+    
+    public int[][] transpose(int[][] matrix) {
+        
+        int m=matrix.length;//row
+        int n=matrix[0].length;//column
+        int[][] result= new int[n][m];//change row to column and column to rows
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                  result[i][j]=matrix[j][i];
+            }
+        }
+        return result;
+    }
+}
+Q-4
+ public int arrayPairSum(int[] nums) {
+        
+        Arrays.sort(nums);
+        int res=0;
+        for(int i=0;i<nums.length;i+=2)
+        {
+            res+=nums[i];
+        }
+        return res;
+    }
+Q-5
+  public int arrangeCoins(int n) {
+        long l=0,r=n;
+         long mid,k;
+         while(l<=r){
+             mid=l+(r-l)/2;
+             k=mid*(mid+1)/2;
+             if(k==n){
+                 return (int)mid;
+             }
+             else if(k<n){
+                 l=mid+1;
+             }
+             else{
+                 r=mid-1;
+             }
+         }
+         return (int)r;
+Q-6
+class Solution {
+  
+   public int[] sortedSquares(int[] nums) {
+        
+        int i=0, j=nums.length-1;
+        int r[] = new int[nums.length];
+        int k=r.length-1;
+        while(i<=j)
+        {
+            int p1=nums[i]*nums[i];
+            int p2=nums[j]*nums[j];
+            if(p1>=p2)
+            {
+                r[k--]=p1;
+                i++;
+            }
+            if(p2>p1)
+            {
+                 r[k--]=p2;
+                 j--;
+            }
+        }
+        return r;
+    }
+Q-7
+public int maxCount(int m, int n, int[][] ops) {
+       
+        int k=ops.length;
+        //int minc=k,minr=0;
+        for (int i=0;i<k;i++)
+        {
+            int z=ops[i][0] ,x=ops[i][1];
+            n=Math.min(n,x);
+            m=Math.min(m,z);
+        }
+        return (m*n);
+    }
+Q-8
+
+       public int[] shuffle(int[] nums, int n) {
+        int[] result = new int[n * 2];
+        
+        for(int i = 0 ; i < n ; i++){
+            result[i * 2] = nums[i];
+            result[i * 2 + 1] = nums[n + i];
+        }
+
+        return result;
+    }
